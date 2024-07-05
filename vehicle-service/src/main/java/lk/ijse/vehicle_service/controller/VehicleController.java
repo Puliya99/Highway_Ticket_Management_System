@@ -14,34 +14,30 @@ public class VehicleController {
     @Autowired
     VehicleServices vehicleServices;
 
-    @PostMapping
+    @GetMapping
     public void checkHealth(){
         System.out.println("Vehicle Worked...");
     }
 
-    @PostMapping
-    @RequestMapping("/register")
+    @PostMapping("/register")
     public String registerVehicle(@RequestBody VehicleDTO vehicleDTO){
         String resp = vehicleServices.registerVehicle(vehicleDTO);
         return resp;
     }
 
-    @PutMapping
-    @RequestMapping("/update/{updateVehicleId}")
+    @PutMapping("/update/{updateVehicleId}")
     public String updateVehicle(@PathVariable ("updateVehicleId") String updateVehicleId , @RequestBody VehicleDTO vehicleDTO){
         String resp = vehicleServices.updateVehicle(updateVehicleId, vehicleDTO);
         return resp;
     }
 
-    @DeleteMapping
-    @RequestMapping("/delete/{deleteVehicleId}")
+    @DeleteMapping("/delete/{deleteVehicleId}")
     public String deleteVehicle(@PathVariable ("deleteVehicleId") String deleteVehicleId){
         String resp = vehicleServices.deleteVehicle(deleteVehicleId);
         return resp;
     }
 
-    @GetMapping
-    @RequestMapping("/getAllVehicles")
+    @GetMapping("/getAllVehicles")
     public List<VehicleDTO> getAllVehicles(){
         List<VehicleDTO> allVehicles = vehicleServices.getAllVehicles();
         return allVehicles;

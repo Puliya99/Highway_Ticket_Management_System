@@ -21,6 +21,6 @@ public class VehicleEntity implements SuperEntity{
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "userId")  // Change the column name here
+    @JoinColumn(name = "userId")
     private UserEntity users;
 }

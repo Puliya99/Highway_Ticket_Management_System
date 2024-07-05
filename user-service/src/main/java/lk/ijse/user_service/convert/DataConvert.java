@@ -5,6 +5,7 @@ import lk.ijse.user_service.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -18,5 +19,9 @@ public class DataConvert {
 
     public UserEntity userDTOConvertUserEntity(UserDTO userDTO){
         return modelMapper.map(userDTO, UserEntity.class);
+    }
+
+    public List<UserDTO> usersEntityListConvertUserDTOList(List<UserEntity> UserEntityList){
+        return modelMapper.map(UserEntityList, List.class);
     }
 }

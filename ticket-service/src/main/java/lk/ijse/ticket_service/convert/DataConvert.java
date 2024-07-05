@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class DataConvert {
@@ -19,5 +21,9 @@ public class DataConvert {
 
     public TicketEntity ticketDTOConvertTicketEntity(TicketDTO ticketDTO){
         return modelMapper.map(ticketDTO, TicketEntity.class);
+    }
+
+    public List<TicketDTO> ticketsEntityListConvertticketDTOList(List<TicketEntity> TicketEntityList){
+        return modelMapper.map(TicketEntityList, List.class);
     }
 }

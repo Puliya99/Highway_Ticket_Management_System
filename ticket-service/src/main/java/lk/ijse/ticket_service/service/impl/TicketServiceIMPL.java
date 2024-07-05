@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 public class TicketServiceIMPL implements TicketServices {
@@ -103,5 +106,27 @@ public class TicketServiceIMPL implements TicketServices {
         TicketEntity ticketEntity = ticketRepo.findById(ticketId).orElse(null);
         ticketEntity.setStatus("PAID");
         ticketRepo.save(ticketEntity);
+    }
+
+    @Override
+    public String deleteTicket(String deleteTicketId) {
+        try {
+            Optional<TicketEntity> optionalTicketEntity = ticketRepo.findById(deleteTicketId);
+            if (optionalTicketEntity.isPresent()) {
+                ticketRepo.deleteById(deleteTicketId);
+                return "Ticket deleted successfully";
+            } else {
+                return "Ticket not found";
+            }
+        } catch (Exception e) {
+            logger.error("Error while deleting Ticket", e);
+            return "Failed to delete Ticket";
+        }
+    }
+
+    @Override
+    public List<TicketDTO> getAllTicketDetails() {
+        List<TicketEntity> allTickets = ticketRepo.findAll();
+        return dataConvert.ticketsEntityListConvertticketDTOList(allTickets);
     }
 }
