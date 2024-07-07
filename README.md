@@ -97,7 +97,9 @@ Tools: Postman - https://www.postman.com/telecoms-astronaut-34620843/workspace/h
 - Ensure integration between services works as expected.
   
 #### Getting Started
-Prerequisites
-Java 17
-Maven
-Git
+
+**Prerequisites**
+
+- Java 17
+- Maven
+- Git
