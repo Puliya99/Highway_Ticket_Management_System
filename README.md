@@ -85,3 +85,18 @@ In today's dynamic transportation landscape, managing highway tickets efficientl
 - Add dependencies for Eureka Client and Spring Web.
 - Annotate the main class with `@EnableEurekaClient`.
 - Define endpoints in `PaymentController`.
+
+Testing
+Tools: Postman - https://www.postman.com/telecoms-astronaut-34620843/workspace/highwayticketmanagementsystem/collection/30946361-18f4d045-6143-4afa-ba1e-867d3b08c2f3?action=share&creator=30946361
+
+Approach:
+
+Create Postman collections for each microservice.
+Test all API endpoints for each service.
+Validate error handling and edge cases.
+Ensure integration between services works as expected.
+Getting Started
+Prerequisites
+Java 17
+Maven
+Git
