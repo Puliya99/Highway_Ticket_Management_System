@@ -9,6 +9,7 @@ public interface VehicleServices {
      String registerVehicle(VehicleDTO vehicleDTO);
      String updateVehicle(String updateVehicleId , VehicleDTO vehicleDTO);
      String deleteVehicle(String deleteVehicleId);
+     String getVehicle(String vehicleId);
      List<VehicleDTO> getAllVehicles();
 
 }

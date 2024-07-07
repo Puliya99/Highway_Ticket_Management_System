@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 
 @Service
@@ -28,8 +27,6 @@ public class VehicleServiceIMPL implements VehicleServices {
 
     @Override
     public String registerVehicle(@RequestBody  VehicleDTO vehicleDTO) {
-
-
         if (vehicleRepo.existsById(vehicleDTO.getVehicleId())){
             logger.info("This Id Have Already register Vehicle");
             return "This Id Have Already register Vehicle";
@@ -42,7 +39,6 @@ public class VehicleServiceIMPL implements VehicleServices {
 
     @Override
     public String updateVehicle(String updateVehicleId, VehicleDTO vehicleDTO) {
-
         if (vehicleRepo.existsById(updateVehicleId)){
             VehicleEntity updateVehicleEntity = vehicleRepo.findById(updateVehicleId).orElse(null);
             updateVehicleEntity.setVehicleNumber(vehicleDTO.getVehicleNumber());
@@ -59,13 +55,25 @@ public class VehicleServiceIMPL implements VehicleServices {
 
     @Override
     public String deleteVehicle(String deleteVehicleId) {
-
         if (vehicleRepo.existsById(deleteVehicleId)){
              vehicleRepo.deleteById(deleteVehicleId);
              return "Vehicle Delete Success";
         }else{
             logger.info("This Id Have No Vehicle");
             return "This Id Have No Vehicle";
+        }
+    }
+
+    @Override
+    public String getVehicle(String vehicleId) {
+        if (vehicleRepo.existsById(vehicleId)){
+            VehicleEntity vehicle = vehicleRepo.findById(vehicleId).orElse(null);
+            return "Vehicle Id : " + vehicle.getVehicleId() + "\n" +
+                    "Vehicle Number : " + vehicle.getVehicleNumber() + "\n" +
+                    "Vehicle Type : " + vehicle.getVehicleType();
+        } else {
+            logger.info("This Id Has No Vehicle");
+            return "This Id Has No Vehicle";
         }
     }
 

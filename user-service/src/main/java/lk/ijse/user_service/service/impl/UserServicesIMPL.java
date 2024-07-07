@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +66,19 @@ public class UserServicesIMPL implements UserServices {
         } catch (Exception e) {
             logger.error("Error while deleting user", e);
             return "Failed to delete user";
+        }
+    }
+
+    public String getUser(String userId) {
+        if (userRepo.existsById(userId)){
+            UserEntity user = userRepo.findById(userId).orElse(null);
+            return "User Id : " + user.getUserId() + "\n" +
+                    "User Mail : " + user.getUserMail() + "\n" +
+                    "User Name : " + user.getUserName() + "\n" +
+                    "Password: " + user.getPassword();
+        } else {
+            logger.info("This Id Has No User");
+            return "This Id Has No User";
         }
     }
 

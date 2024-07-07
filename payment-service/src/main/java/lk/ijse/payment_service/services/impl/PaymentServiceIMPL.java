@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -30,33 +31,34 @@ public class PaymentServiceIMPL implements PaymentServices {
 
     @Override
     public String confirmPayment(PaymentDTO paymentDTO) {
+        if (paymentRepo.existsById(paymentDTO.getPaymentId())) {
+            logger.info("This Id Has Already Payment");
+            return "This Id Has Already Payment";
+        } else {
+            try {
+                Boolean alreadyTicketHaveCheck = restTemplate.getForObject("http://localhost:8082/api/v1/ticketService/ticketHaveCheck/" + paymentDTO.getTicket().getTicketId(), Boolean.class);
+                if (Boolean.TRUE.equals(alreadyTicketHaveCheck)) {
+                    if (paymentDTO.getPaymentPrice() <= paymentDTO.getCash()) {
+                        PaymentEntity paymentEntity = dataConvert.paymentDTOConvertPaymentEntity(paymentDTO);
+                        paymentEntity.setBalance(paymentEntity.getCash() - paymentEntity.getPaymentPrice());
+                        paymentRepo.save(paymentEntity);
 
-        if (paymentRepo.existsById(paymentDTO.getPaymentId())){
-            logger.info("This Id Have Already Payment");
-            return "This Id Have Already Payment";
-        }else {
-
-            boolean alreadyTicketHaveCheck = restTemplate.getForObject("http://localhost:8082/api/v1/ticketService/ticketHaveCheck/"+paymentDTO.getTicket().getTicketId(), Boolean.class);
-            if (alreadyTicketHaveCheck){
-                if (paymentDTO.getPaymentPrice() <= paymentDTO.getCash()){
-                    PaymentEntity paymentEntity = dataConvert.paymentDTOConvertPaymentEntity(paymentDTO);
-                    paymentEntity.setBalance(paymentEntity.getCash() - paymentEntity.getPaymentPrice());
-                    paymentRepo.save(paymentEntity);
-
-                    restTemplate.postForObject("http://localhost:8082/api/v1/ticketService/statusUpdate/" + paymentDTO.getTicket().getTicketId(), null, String.class);
-                    logger.info("Payment Success and Ticket Status Updated...");
-                    return "Payment Success and Ticket Status Updated...";
-                }else{
-                    logger.info("This amount is insufficient to cover the payment");
-                    return "This amount is insufficient to cover the payment";
+                        restTemplate.postForObject("http://localhost:8082/api/v1/ticketService/statusUpdate/" + paymentDTO.getTicket().getTicketId(), null, String.class);
+                        logger.info("Payment Success and Ticket Status Updated...");
+                        return "Payment Success and Ticket Status Updated...";
+                    } else {
+                        logger.info("This amount is insufficient to cover the payment");
+                        return "This amount is insufficient to cover the payment";
+                    }
+                } else {
+                    logger.info("This Id Has No Ticket");
+                    return "This Id Has No Ticket";
                 }
-
-            }else{
-                logger.info("This Id Have No Ticket");
-                return "This Id Have No Ticket";
+            } catch (RestClientException e) {
+                logger.error("Error during communication with ticket service", e);
+                return "Error during communication with ticket service";
             }
-
-
         }
     }
+
 }

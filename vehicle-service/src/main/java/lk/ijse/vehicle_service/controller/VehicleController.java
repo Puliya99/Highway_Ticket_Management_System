@@ -37,6 +37,12 @@ public class VehicleController {
         return resp;
     }
 
+    @GetMapping("/getVehicle/{vehicleId}")
+    public String getVehicleDetails(@PathVariable("vehicleId") String vehicleId){
+        String vehicleDetails = vehicleServices.getVehicle(vehicleId);
+        return vehicleDetails;
+    }
+
     @GetMapping("/getAllVehicles")
     public List<VehicleDTO> getAllVehicles(){
         List<VehicleDTO> allVehicles = vehicleServices.getAllVehicles();

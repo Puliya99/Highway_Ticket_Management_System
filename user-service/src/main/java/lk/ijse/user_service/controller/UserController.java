@@ -37,8 +37,14 @@ public class UserController {
         return resp;
     }
 
+    @GetMapping("/getUser/{userId}")
+    public String getUserDetails(@PathVariable("userId") String userId){
+        String userDetails = userServices.getUser(userId);
+        return userDetails;
+    }
+
     @GetMapping("/getAllUsers")
-    public List<UserDTO> getAllVehicles(){
+    public List<UserDTO> getAllUsers(){
         List<UserDTO> allUsers = userServices.getAllUsers();
         return allUsers;
     }

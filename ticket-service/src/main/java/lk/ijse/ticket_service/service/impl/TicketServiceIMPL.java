@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -77,6 +77,22 @@ public class TicketServiceIMPL implements TicketServices {
     }
 
     @Override
+    public String deleteTicket(String deleteTicketId) {
+        try {
+            Optional<TicketEntity> optionalTicketEntity = ticketRepo.findById(deleteTicketId);
+            if (optionalTicketEntity.isPresent()) {
+                ticketRepo.deleteById(deleteTicketId);
+                return "Ticket deleted successfully";
+            } else {
+                return "Ticket not found";
+            }
+        } catch (Exception e) {
+            logger.error("Error while deleting Ticket", e);
+            return "Failed to delete Ticket";
+        }
+    }
+
+    @Override
     public String getTicketDetails(String ticketId) {
 
         if (ticketRepo.existsById(ticketId)){
@@ -96,37 +112,20 @@ public class TicketServiceIMPL implements TicketServices {
     }
 
     @Override
+    public List<TicketDTO> getAllTicketDetails() {
+        List<TicketEntity> allTickets = ticketRepo.findAll();
+        return dataConvert.ticketsEntityListConvertticketDTOList(allTickets);
+    }
+
+    @Override
     public boolean alreadyTicketHaveCheck(String ticketId) {
-        boolean ticektHaveCheck = ticketRepo.existsById(ticketId);
-        return ticektHaveCheck;
+        return ticketRepo.existsById(ticketId);
     }
 
     @Override
     public void ticketStatusUpdate(String ticketId) {
-        TicketEntity ticketEntity = ticketRepo.findById(ticketId).orElse(null);
+        TicketEntity ticketEntity = ticketRepo.findById(ticketId).orElseThrow(() -> new NoSuchElementException("Ticket not found"));
         ticketEntity.setStatus("PAID");
         ticketRepo.save(ticketEntity);
-    }
-
-    @Override
-    public String deleteTicket(String deleteTicketId) {
-        try {
-            Optional<TicketEntity> optionalTicketEntity = ticketRepo.findById(deleteTicketId);
-            if (optionalTicketEntity.isPresent()) {
-                ticketRepo.deleteById(deleteTicketId);
-                return "Ticket deleted successfully";
-            } else {
-                return "Ticket not found";
-            }
-        } catch (Exception e) {
-            logger.error("Error while deleting Ticket", e);
-            return "Failed to delete Ticket";
-        }
-    }
-
-    @Override
-    public List<TicketDTO> getAllTicketDetails() {
-        List<TicketEntity> allTickets = ticketRepo.findAll();
-        return dataConvert.ticketsEntityListConvertticketDTOList(allTickets);
     }
 }
