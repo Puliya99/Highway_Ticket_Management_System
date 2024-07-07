@@ -85,5 +85,3 @@ In today's dynamic transportation landscape, managing highway tickets efficientl
 - Add dependencies for Eureka Client and Spring Web.
 - Annotate the main class with `@EnableEurekaClient`.
 - Define endpoints in `PaymentController`.
-
-## Configuration
