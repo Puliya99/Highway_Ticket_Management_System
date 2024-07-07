@@ -1,0 +1,716 @@
+{
+  "collection": {
+    "info": {
+      "_postman_id": "18f4d045-6143-4afa-ba1e-867d3b08c2f3",
+      "name": "HighwayTicketManagementSystem",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "updatedAt": "2024-07-07T18:18:31.000Z",
+      "createdAt": "2024-07-03T14:23:28.000Z",
+      "lastUpdatedBy": "30946361",
+      "uid": "30946361-18f4d045-6143-4afa-ba1e-867d3b08c2f3"
+    },
+    "item": [
+      {
+        "name": "paymentService",
+        "item": [
+          {
+            "name": "paymentServiceCheck",
+            "id": "d1db7bdb-9224-4bb7-940c-107b0290aae2",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8082/api/v1/vehicleService",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8082",
+                "path": [
+                  "api",
+                  "v1",
+                  "vehicleService"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-d1db7bdb-9224-4bb7-940c-107b0290aae2"
+          },
+          {
+            "name": "confirmPayment",
+            "id": "6714f15f-f08a-463a-96bb-2b9de4e5efbc",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"paymentId\":\"P002\",\n    \"paymentTime\":\"11.49 PM\",\n    \"status\":\"PAID\",\n    \"paymentPrice\":2400.00,\n    \"cash\":2500.00,\n    \"ticket\":{\n        \"ticketId\":\"T002\"\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8085/api/v1/paymentService/confirmPayment",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8085",
+                "path": [
+                  "api",
+                  "v1",
+                  "paymentService",
+                  "confirmPayment"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-6714f15f-f08a-463a-96bb-2b9de4e5efbc"
+          }
+        ],
+        "id": "02f4ce63-b0a2-4f1d-91a4-6e94fe05c23b",
+        "uid": "30946361-02f4ce63-b0a2-4f1d-91a4-6e94fe05c23b"
+      },
+      {
+        "name": "ticketService",
+        "item": [
+          {
+            "name": "ticketServiceCheck",
+            "id": "ab9a054b-9eb7-404a-9143-c1ed6d3ceaec",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-ab9a054b-9eb7-404a-9143-c1ed6d3ceaec"
+          },
+          {
+            "name": "createTicket",
+            "id": "76994fbc-ed8a-4391-ac3a-6a27e14f9cf9",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"ticketId\": \"T003\",\n    \"entranceLocation\": \"Kottawa\",\n    \"exitLocation\": \"Hambanthota\",\n    \"status\": \"NO PAID\",\n    \"ticketIssueTime\": \"6.42 PM\",\n    \"oneKmPrice\": 20,\n    \"totalKm\": 180,\n    \"price\": 3600,\n    \"vehicle\":{\n        \"vehicleId\":\"V003\"\n    }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService/createTicket",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService",
+                  "createTicket"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-76994fbc-ed8a-4391-ac3a-6a27e14f9cf9"
+          },
+          {
+            "name": "updateTicket",
+            "id": "59474e14-544e-4858-b9a5-81543d57af11",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\r\n    \"ticketId\": \"T003\",\r\n    \"entranceLocation\": \"Kottawa\",\r\n    \"exitLocation\": \"matara\",\r\n    \"status\": \"NO PAID\",\r\n    \"ticketIssueTime\": \"6.42 PM\",\r\n    \"oneKmPrice\": 20,\r\n    \"totalKm\": 160,\r\n    \"price\": 3200,\r\n    \"vehicle\":{\r\n        \"vehicleId\":\"V003\"\r\n    }\r\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService/updateTicket/T003",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService",
+                  "updateTicket",
+                  "T003"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-59474e14-544e-4858-b9a5-81543d57af11"
+          },
+          {
+            "name": "getTicketDetails",
+            "id": "1e49704e-b520-41d9-938d-a7f272d2b82a",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService/getTicketDetails/T001",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService",
+                  "getTicketDetails",
+                  "T001"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-1e49704e-b520-41d9-938d-a7f272d2b82a"
+          },
+          {
+            "name": "getAllTicket",
+            "id": "366932e1-4c02-42df-b4de-a409b52ea93f",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService/getAllTicket",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService",
+                  "getAllTicket"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-366932e1-4c02-42df-b4de-a409b52ea93f"
+          },
+          {
+            "name": "ticketHaveCheck",
+            "id": "2752920e-c974-4f26-ba5b-4e8a199477f8",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService/ticketHaveCheck/T001",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService",
+                  "ticketHaveCheck",
+                  "T001"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-2752920e-c974-4f26-ba5b-4e8a199477f8"
+          },
+          {
+            "name": "statusUpdate",
+            "id": "03299b13-e5ff-4d2f-8792-b135489d36c2",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService/statusUpdate/T001",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService",
+                  "statusUpdate",
+                  "T001"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-03299b13-e5ff-4d2f-8792-b135489d36c2"
+          },
+          {
+            "name": "delete",
+            "id": "826199ef-e94d-4b17-a422-9a9b2318a73b",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8083/api/v1/ticketService/delete/T003",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8083",
+                "path": [
+                  "api",
+                  "v1",
+                  "ticketService",
+                  "delete",
+                  "T003"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-826199ef-e94d-4b17-a422-9a9b2318a73b"
+          }
+        ],
+        "id": "6ebabf64-f432-4ed4-86cc-d82ede1466b8",
+        "uid": "30946361-6ebabf64-f432-4ed4-86cc-d82ede1466b8"
+      },
+      {
+        "name": "vehicleService",
+        "item": [
+          {
+            "name": "vehicleServiceCheck",
+            "id": "173d10fa-0364-4928-9e8a-06fc1b8c37ea",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8084/api/v1/vehicleService",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8084",
+                "path": [
+                  "api",
+                  "v1",
+                  "vehicleService"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-173d10fa-0364-4928-9e8a-06fc1b8c37ea"
+          },
+          {
+            "name": "register",
+            "id": "84f3180e-572f-48f5-b84f-025242a11ac0",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"vehicleId\": \"V004\",\n  \"vehicleNumber\": \"AAM-3744\",\n  \"vehicleType\": \"Car\",\n  \"users\": {\n    \"userId\": \"U004\"\n  }\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8084/api/v1/vehicleService/register",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8084",
+                "path": [
+                  "api",
+                  "v1",
+                  "vehicleService",
+                  "register"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-84f3180e-572f-48f5-b84f-025242a11ac0"
+          },
+          {
+            "name": "update",
+            "id": "6b47e1b7-02a4-487c-aa2a-724ebab0dfc9",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\r\n  \"vehicleNumber\": \"BAK-8038\",\r\n  \"vehicleType\": \"Car\",\r\n  \"users\": {\r\n    \"userId\": \"U004\"\r\n  }\r\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8084/api/v1/vehicleService/update/V004",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8084",
+                "path": [
+                  "api",
+                  "v1",
+                  "vehicleService",
+                  "update",
+                  "V004"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-6b47e1b7-02a4-487c-aa2a-724ebab0dfc9"
+          },
+          {
+            "name": "getVehicle",
+            "id": "0938d1c2-df62-4d23-96ea-c4bf6ef2e2ac",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8084/api/v1/vehicleService/getVehicle/V001",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8084",
+                "path": [
+                  "api",
+                  "v1",
+                  "vehicleService",
+                  "getVehicle",
+                  "V001"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-0938d1c2-df62-4d23-96ea-c4bf6ef2e2ac"
+          },
+          {
+            "name": "getAllVehicles",
+            "id": "86132045-a221-423e-8fa1-e806c4014608",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8084/api/v1/vehicleService/getAllVehicles",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8084",
+                "path": [
+                  "api",
+                  "v1",
+                  "vehicleService",
+                  "getAllVehicles"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-86132045-a221-423e-8fa1-e806c4014608"
+          },
+          {
+            "name": "Delete Vehicle",
+            "id": "f6c9ff27-6e7c-489c-8061-8058374515eb",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8084/api/v1/vehicleService/delete/V004",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8084",
+                "path": [
+                  "api",
+                  "v1",
+                  "vehicleService",
+                  "delete",
+                  "V004"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-f6c9ff27-6e7c-489c-8061-8058374515eb"
+          }
+        ],
+        "id": "d1ea8fdb-a1c3-4884-9acf-7c6e1f81fb27",
+        "uid": "30946361-d1ea8fdb-a1c3-4884-9acf-7c6e1f81fb27"
+      },
+      {
+        "name": "UserService",
+        "item": [
+          {
+            "name": "userServiceCheck",
+            "id": "65a630bc-97d4-4169-9b30-b2d783e6e231",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8081/api/v1/userService",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8081",
+                "path": [
+                  "api",
+                  "v1",
+                  "userService"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-65a630bc-97d4-4169-9b30-b2d783e6e231"
+          },
+          {
+            "name": "save",
+            "id": "5823b5ce-4b68-4c36-8569-90287e3e6b96",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"userId\":\"U005\",\n    \"userMail\":\"nanayakkarapriya@gmail.com\",\n    \"userName\":\"priyanthi\",\n    \"password\":\"priya@10\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8081/api/v1/userService/save",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8081",
+                "path": [
+                  "api",
+                  "v1",
+                  "userService",
+                  "save"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-5823b5ce-4b68-4c36-8569-90287e3e6b96"
+          },
+          {
+            "name": "update",
+            "id": "6801e05e-1ac4-4ba5-a0a0-bb5b6bc2dcad",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "PUT",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\r\n    \"userMail\":\"puli@gmail.com\",\r\n    \"userName\":\"puliya\",\r\n    \"password\":\"puliya@99\"\r\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "http://localhost:8081/api/v1/userService/update/U005",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8081",
+                "path": [
+                  "api",
+                  "v1",
+                  "userService",
+                  "update",
+                  "U005"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-6801e05e-1ac4-4ba5-a0a0-bb5b6bc2dcad"
+          },
+          {
+            "name": "getUser",
+            "id": "7297b24d-f8bd-4531-a78a-53cf172090b9",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8081/api/v1/userService/getUser/U001",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8081",
+                "path": [
+                  "api",
+                  "v1",
+                  "userService",
+                  "getUser",
+                  "U001"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-7297b24d-f8bd-4531-a78a-53cf172090b9"
+          },
+          {
+            "name": "getAllUsers",
+            "id": "eb259fc2-d844-4919-ac9e-69a2accd04a3",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "GET",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8081/api/v1/userService/getAllUsers",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8081",
+                "path": [
+                  "api",
+                  "v1",
+                  "userService",
+                  "getAllUsers"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-eb259fc2-d844-4919-ac9e-69a2accd04a3"
+          },
+          {
+            "name": "delete",
+            "id": "afbf4d6b-d4ef-458c-be1f-b77ff9a48613",
+            "protocolProfileBehavior": {
+              "disableBodyPruning": true
+            },
+            "request": {
+              "method": "DELETE",
+              "header": [],
+              "url": {
+                "raw": "http://localhost:8081/api/v1/userService/delete/U005",
+                "protocol": "http",
+                "host": [
+                  "localhost"
+                ],
+                "port": "8081",
+                "path": [
+                  "api",
+                  "v1",
+                  "userService",
+                  "delete",
+                  "U005"
+                ]
+              }
+            },
+            "response": [],
+            "uid": "30946361-afbf4d6b-d4ef-458c-be1f-b77ff9a48613"
+          }
+        ],
+        "id": "52d860a5-4b5c-431f-bf14-67bae241c44a",
+        "uid": "30946361-52d860a5-4b5c-431f-bf14-67bae241c44a"
+      }
+    ]
+  }
+}
